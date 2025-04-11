@@ -1,0 +1,67 @@
+================================
+ Preceptron1.java Documentation
+================================
+
+Purpose:
+--------
+This Java program implements a simple single-layer perceptron. A perceptron is a basic type of artificial neuron often used for binary classification or simple regression tasks where the output is expected to be between 0 and 1. It learns from labeled data (inputs and corresponding target outputs) through a training process.
+
+Core Components:
+----------------
+1.  **Weights & Bias:** Internal parameters that the perceptron learns during training.
+    *   `weights`: A list of values, one for each input feature.
+    *   `bias`: A single offset value.
+    *   Initialized randomly between 0.0 and 1.0.
+2.  **Sigmoid Activation Function:** (`sigmoid` method)
+    *   Squashes the weighted sum of inputs plus the bias into a range between 0 and 1.
+    *   Formula: `1 / (1 + e^(-x))` where `x` is the weighted sum + bias.
+3.  **Prediction:** (`Prediction` method)
+    *   Takes an input sample (array of doubles).
+    *   Calculates the weighted sum of inputs, adds the bias.
+    *   Applies the sigmoid function to produce the final output (prediction).
+4.  **Training:** (`training` method)
+    *   Adjusts the weights and bias iteratively to minimize the difference between the predicted output and the target output.
+    *   Uses the **gradient descent** algorithm with backpropagation.
+    *   Calculates the error (`predicted - target`).
+    *   Calculates `delta` (error scaled by the derivative of the sigmoid function: `error * prediction * (1 - prediction)`).
+    *   Updates weights and bias based on `delta`, the `learningRate`, and the input values only if the error is non-zero.
+    *   Runs for a specified number of `epoches` (passes through the entire training dataset).
+    *   Calculates the Mean Squared Error (MSE) at the end of training as a measure of overall error.
+
+How to Use:
+-----------
+1.  **Create an Instance:**
+    ```java
+    int numberOfInputFeatures = 2; // e.g., 2 features per input sample
+    int trainingEpochs = 10000;
+    Preceptron1 myPerceptron = new Preceptron1(numberOfInputFeatures, trainingEpochs);
+    ```
+2.  **Prepare Training Data:**
+    *   `inputs`: A 2D array `double[][]` where each inner array is one input sample.
+    *   `output`: A 1D array `double[]` containing the corresponding target output for each input sample.
+3.  **Train the Perceptron:**
+    ```java
+    myPerceptron.training(trainingInputs, trainingOutputs);
+    ```
+4.  **Make Predictions:**
+    ```java
+    double[] new_input = {0.7, 0.1};
+    double prediction = myPerceptron.Prediction(new_input);
+    System.out.println("Prediction for " + Arrays.toString(new_input) + ": " + prediction);
+    ```
+
+Key Parameters:
+---------------
+*   `numberOfInputs`: Must match the number of features in each input sample. Set in the constructor.
+*   `epoches`: The number of times the training process iterates over the entire dataset. Set in the constructor.
+*   `learningRate`: Controls how much the weights and bias are adjusted during each update (hardcoded to 0.1 in this version).
+
+Example Usage (`main` method):
+-----------------------------
+The `main` method within `Preceptron1.java` provides a complete example:
+1.  Defines sample training inputs and outputs.
+2.  Creates and trains the perceptron.
+3.  Defines sample testing inputs and outputs.
+4.  Iterates through testing inputs, makes predictions.
+5.  Compares the prediction (`result`) to the target (`testingOutputs[i]`) using a tolerance (`Math.abs(result - target) > tolerance`) because direct comparison of floating-point numbers can be unreliable. It prints whether the prediction is considered close to the target.
+
