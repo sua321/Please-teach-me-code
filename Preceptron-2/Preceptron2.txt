@@ -1,0 +1,64 @@
+# Simple Backpropagation Neural Network in Java
+
+## Description
+
+This project implements a basic feedforward neural network with one hidden layer from scratch in Java. It uses the backpropagation algorithm to train the network on a small, hardcoded dataset for a regression task.
+
+The network structure is:
+*   Input Layer (configurable number of inputs, 2 in the example)
+*   One Hidden Layer (configurable number of neurons, 10 in the example) with Sigmoid activation
+*   Output Layer (1 neuron) with Sigmoid activation
+
+This code serves as a learning exercise to understand the fundamental mechanics of neural networks and backpropagation without relying on external ML libraries.
+
+## How to Run
+
+1.  Compile the Java files:
+    ```bash
+    javac ForwardPass.java Backpropagation.java
+    ```
+2.  Run the `Backpropagation` class:
+    ```bash
+    java Backpropagation
+    ```
+    This will initialize the network, train it on the hardcoded training data for a set number of epochs (printing Mean Squared Error periodically), and then test it on a separate hardcoded testing set, printing the predictions and expected outputs.
+
+## Code Structure
+
+*   `ForwardPass.java`: Contains the `ForwardPass` class responsible for:
+    *   Initializing weights and biases.
+    *   Performing the forward pass calculation (predicting an output given an input).
+    *   Defining the Sigmoid activation function.
+*   `Backpropagation.java`: Contains the `Backpropagation` class responsible for:
+    *   Setting up the training data and parameters (learning rate, epochs).
+    *   Orchestrating the training loop.
+    *   Calculating the error and deltas (backpropagation).
+    *   Updating the weights and biases using the calculated deltas and learning rate.
+    *   Running the final test predictions.
+    *   Includes the `main` method to run the program.
+
+## Good Things / Features
+
+*   **Clear Implementation:** Provides a relatively straightforward implementation of the forward and backward passes.
+*   **Educational:** Excellent for understanding the core concepts behind neural network training.
+*   **Self-Contained:** Runs with standard Java, no external libraries needed.
+*   **Includes Training & Testing:** Demonstrates a basic train/test workflow.
+*   **MSE Monitoring:** Shows the Mean Squared Error during training to monitor learning progress.
+
+## Limitations / Potential Issues
+
+*   **Fixed Architecture:** Hardcoded for exactly one hidden layer and one output neuron.
+*   **Sigmoid Only:** Uses only the Sigmoid activation function. Other functions (ReLU, Tanh) might be better for different problems.
+*   **Basic Initialization:** Uses simple random initialization; more advanced techniques exist.
+*   **Stochastic Gradient Descent:** Updates weights after *every* single training sample. Batch or mini-batch gradient descent is often more stable and efficient.
+*   **Hardcoded Data:** Training and testing data are embedded in the code, not loaded from files.
+*   **Not Scalable:** Not designed for large datasets or complex network structures in its current form.
+
+## Potential Improvements
+
+*   Allow configuration of the number of hidden layers and neurons per layer.
+*   Support multiple output neurons.
+*   Implement other activation functions (e.g., ReLU).
+*   Add options for different weight initialization strategies.
+*   Implement mini-batch gradient descent.
+*   Load data from external files (e.g., CSV).
